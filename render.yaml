@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: college-notes
+    runtime: python
+    buildCommand: ./build.sh
+    startCommand: python colleague_portal/manage.py migrate && gunicorn --chdir colleague_portal colleague_portal.wsgi:application
+    envVars:
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DJANGO_DEBUG
+        value: "False"
+      - key: WEB_CONCURRENCY
+        value: "4"

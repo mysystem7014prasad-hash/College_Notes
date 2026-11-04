@@ -1,7 +1,8 @@
 .venv/
 __pycache__/
+*.pyc
 *.py[cod]
-*.sqlite3
 *.zip
+staticfiles/
 .env
 .DS_Store
