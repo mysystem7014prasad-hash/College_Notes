@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BCA Study Materials</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    /* =========================
+       BODY
+       ========================= */
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        min-height: 100vh;
+        color: #dbeafe;
+        background: #0b0f14;
+        overflow-x: hidden;
+        position: relative;
+    }
+
+    /* Developer grid background */
+    body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image:
+            linear-gradient(
+                rgba(56, 189, 248, 0.035) 1px,
+                transparent 1px
+            ),
+            linear-gradient(
+                90deg,
+                rgba(56, 189, 248, 0.035) 1px,
+                transparent 1px
+            );
+        background-size: 35px 35px;
+        pointer-events: none;
+        z-index: -2;
+    }
+
+    /* Ambient developer glow */
+    body::after {
+        content: "";
+        position: fixed;
+        width: 600px;
+        height: 600px;
+        left: 50%;
+        top: 30%;
+        transform: translate(-50%, -50%);
+        background: radial-gradient(
+            circle,
+            rgba(14, 165, 233, 0.08),
+            transparent 70%
+        );
+        filter: blur(40px);
+        pointer-events: none;
+        z-index: -1;
+    }
+
+    /* =========================
+       HERO / IDE HEADER
+       ========================= */
+    .hero {
+        background: #11161d;
+        padding: 60px 20px 50px;
+        text-align: center;
+        color: white;
+        border-bottom: 1px solid #26313d;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Fake terminal/code symbols */
+    .hero::before {
+        content: "</>";
+        position: absolute;
+        left: 8%;
+        top: 15px;
+        font-family: Consolas, monospace;
+        font-size: 130px;
+        font-weight: bold;
+        color: rgba(56, 189, 248, 0.025);
+    }
+
+    .hero::after {
+        content: "{ }";
+        position: absolute;
+        right: 8%;
+        top: 20px;
+        font-family: Consolas, monospace;
+        font-size: 110px;
+        font-weight: bold;
+        color: rgba(139, 92, 246, 0.025);
+    }
+
+    .hero h1 {
+        font-family: Consolas, "Courier New", monospace;
+        font-size: 62px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        color: #f8fafc;
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero h1::before {
+        content: "> ";
+        color: #22c55e;
+    }
+
+    .hero h1 i {
+        color: #38bdf8;
+        margin-right: 8px;
+        text-shadow: 0 0 12px rgba(56, 189, 248, 0.7);
+    }
+
+    /* Blinking cursor */
+    .hero h1::after {
+        content: "_";
+        color: #22c55e;
+        animation: cursorBlink 1s steps(2, start) infinite;
+    }
+
+    @keyframes cursorBlink {
+        50% {
+            opacity: 0;
+        }
+    }
+
+    .hero p {
+        font-family: Consolas, "Courier New", monospace;
+        font-size: 18px;
+        color: #94a3b8;
+        margin-top: 12px;
+        font-weight: 400;
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero p::before {
+        content: "// ";
+        color: #22c55e;
+    }
+
+    /* =========================
+       ADMIN BUTTON
+       ========================= */
+    .hero .admin-link {
+        display: inline-block;
+        margin-top: 25px;
+        padding: 11px 28px;
+        border-radius: 6px;
+        background: #161d25;
+        color: #38bdf8;
+        text-decoration: none;
+        font-family: Consolas, "Courier New", monospace;
+        font-weight: 600;
+        font-size: 14px;
+        border: 1px solid #334155;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero .admin-link::before {
+        content: "$ ";
+        color: #22c55e;
+    }
+
+    .hero .admin-link:hover {
+        color: #0b0f14;
+        background: #38bdf8;
+        border-color: #38bdf8;
+        transform: translateY(-3px);
+        box-shadow:
+            0 0 15px rgba(56, 189, 248, 0.35),
+            0 8px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    /* =========================
+       CONTAINER
+       ========================= */
+    .container {
+        max-width: 1100px;
+        margin: -30px auto 40px;
+        padding: 0 20px;
+        position: relative;
+        z-index: 2;
+    }
+
+    /* =========================
+       SECTION TITLE
+       ========================= */
+    .section-title {
+        text-align: center;
+        font-family: Consolas, "Courier New", monospace;
+        font-size: 29px;
+        color: #e2e8f0;
+        margin-bottom: 5px;
+        background: #11161d;
+        padding: 25px 20px 10px;
+        border-radius: 10px 10px 0 0;
+        border: 1px solid #26313d;
+        border-bottom: none;
+    }
+
+    .section-title::before {
+        content: "/* ";
+        color: #64748b;
+    }
+
+    .section-title::after {
+        content: " */";
+        color: #64748b;
+    }
+
+    .section-title i {
+        color: #38bdf8;
+    }
+
+    .section-subtitle {
+        text-align: center;
+        font-family: Consolas, "Courier New", monospace;
+        color: #64748b;
+        margin-bottom: 30px;
+        font-size: 15px;
+        background: #11161d;
+        padding: 0 20px 20px;
+        border-radius: 0 0 10px 10px;
+        border: 1px solid #26313d;
+        border-top: none;
+    }
+
+    .section-subtitle::before {
+        content: "// ";
+        color: #22c55e;
+    }
+
+    /* =========================
+       SEMESTER GRID
+       ========================= */
+    .semester-grid {
+        display: grid;
+        grid-template-columns: repeat(
+            auto-fill,
+            minmax(280px, 1fr)
+        );
+        gap: 25px;
+        margin-top: 10px;
+    }
+
+    /* =========================
+       IDE CARDS
+       ========================= */
+    .semester-card {
+        background: #11161d;
+        border: 1px solid #26313d;
+        border-radius: 10px;
+        padding: 30px 20px;
+        text-align: center;
+        box-shadow:
+            0 8px 25px rgba(0, 0, 0, 0.35),
+            inset 0 1px 0 rgba(255, 255, 255, 0.02);
+        transition:
+            transform 0.3s ease,
+            box-shadow 0.3s ease,
+            border-color 0.3s ease;
+        text-decoration: none;
+        color: #e2e8f0;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* IDE window top bar */
+    .semester-card::before {
+        content: "●  ●  ●";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 28px;
+        padding-left: 12px;
+        display: flex;
+        align-items: center;
+        font-family: Arial, sans-serif;
+        font-size: 8px;
+        letter-spacing: 3px;
+        color: #475569;
+        background: #0d1218;
+        border-bottom: 1px solid #202a35;
+        text-align: left;
+    }
+
+    /* Code line */
+    .semester-card::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 28px;
+        width: 3px;
+        height: calc(100% - 28px);
+        background: #38bdf8;
+        opacity: 0.5;
+        transition: opacity 0.3s ease;
+    }
+
+    .semester-card:hover::after {
+        opacity: 1;
+    }
+
+    /* =========================
+       CARD COLORS
+       ========================= */
+    .semester-card:nth-child(1) {
+        border-left: 3px solid #38bdf8;
+    }
+
+    .semester-card:nth-child(2) {
+        border-left: 3px solid #a78bfa;
+    }
+
+    .semester-card:nth-child(3) {
+        border-left: 3px solid #22d3ee;
+    }
+
+    .semester-card:nth-child(4) {
+        border-left: 3px solid #22c55e;
+    }
+
+    .semester-card:nth-child(5) {
+        border-left: 3px solid #f59e0b;
+    }
+
+    .semester-card:nth-child(6) {
+        border-left: 3px solid #f43f5e;
+    }
+
+    /* =========================
+       CARD HOVER
+       ========================= */
+    .semester-card:hover {
+        transform: translateY(-10px);
+        border-color: #3b4b5d;
+        background: #151c24;
+        box-shadow:
+            0 18px 40px rgba(0, 0, 0, 0.5),
+            0 0 20px rgba(56, 189, 248, 0.08);
+    }
+
+    /* =========================
+       ICON
+       ========================= */
+    .semester-card .icon {
+        font-size: 40px;
+        color: #38bdf8;
+        margin-bottom: 15px;
+        margin-top: 12px;
+        background: #0d1822;
+        width: 68px;
+        height: 68px;
+        line-height: 68px;
+        border-radius: 8px;
+        margin-left: auto;
+        margin-right: auto;
+        border: 1px solid #254154;
+        box-shadow:
+            inset 0 0 15px rgba(56, 189, 248, 0.04);
+        transition: all 0.35s ease;
+    }
+
+    .semester-card:hover .icon {
+        transform: scale(1.08);
+        box-shadow:
+            0 0 20px rgba(56, 189, 248, 0.2);
+    }
+
+    /* Icon colors */
+    .semester-card:nth-child(2) .icon {
+        color: #a78bfa;
+        border-color: #493b68;
+        background: #181426;
+    }
+
+    .semester-card:nth-child(3) .icon {
+        color: #22d3ee;
+        border-color: #25515a;
+        background: #0d1c20;
+    }
+
+    .semester-card:nth-child(4) .icon {
+        color: #22c55e;
+        border-color: #285538;
+        background: #0d1c12;
+    }
+
+    .semester-card:nth-child(5) .icon {
+        color: #f59e0b;
+        border-color: #5a4620;
+        background: #1d170b;
+    }
+
+    .semester-card:nth-child(6) .icon {
+        color: #f43f5e;
+        border-color: #5b2631;
+        background: #1d0e13;
+    }
+
+    /* =========================
+       CARD TEXT
+       ========================= */
+    .semester-card h3 {
+        font-family: Consolas, "Courier New", monospace;
+        font-size: 23px;
+        font-weight: 700;
+        color: #f1f5f9;
+    }
+
+    .semester-card h3::before {
+        content: "01 ";
+        color: #475569;
+        font-size: 13px;
+    }
+
+    .semester-card:nth-child(2) h3::before {
+        content: "02 ";
+    }
+
+    .semester-card:nth-child(3) h3::before {
+        content: "03 ";
+    }
+
+    .semester-card:nth-child(4) h3::before {
+        content: "04 ";
+    }
+
+    .semester-card:nth-child(5) h3::before {
+        content: "05 ";
+    }
+
+    .semester-card:nth-child(6) h3::before {
+        content: "06 ";
+    }
+
+    .semester-card p {
+        color: #64748b;
+        font-size: 14px;
+        margin-top: 7px;
+    }
+
+    /* =========================
+       ARROW
+       ========================= */
+    .semester-card .arrow {
+        display: inline-block;
+        margin-top: 15px;
+        color: #38bdf8;
+        font-family: Consolas, "Courier New", monospace;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        background: #0d1822;
+        padding: 6px 18px;
+        border-radius: 5px;
+        border: 1px solid #254154;
+    }
+
+    .semester-card .arrow::before {
+        content: "$ ";
+        color: #22c55e;
+    }
+
+    .semester-card:hover .arrow {
+        transform: translateX(8px);
+        background: #38bdf8;
+        color: #071018;
+        border-color: #38bdf8;
+        box-shadow:
+            0 0 15px rgba(56, 189, 248, 0.25);
+    }
+
+    .semester-card:hover .arrow::before {
+        color: #071018;
+    }
+
+    /* =========================
+       FOOTER
+       ========================= */
+    .footer {
+        text-align: center;
+        padding: 25px;
+        color: #475569;
+        font-family: Consolas, "Courier New", monospace;
+        font-size: 13px;
+        border-top: 1px solid #202a35;
+        background: #0d1218;
+        margin-top: 40px;
+    }
+
+    .footer::before {
+        content: "/* ";
+        color: #334155;
+    }
+
+    .footer::after {
+        content: " */";
+        color: #334155;
+    }
+
+    .footer i {
+        color: #22c55e;
+        text-shadow: 0 0 8px rgba(34, 197, 94, 0.5);
+    }
+
+    /* =========================
+       MOBILE
+       ========================= */
+    @media (max-width: 600px) {
+
+        .hero h1 {
+            font-size: 40px;
+        }
+
+        .hero p {
+            font-size: 14px;
+        }
+
+        .semester-grid {
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .semester-card {
+            padding: 18px 12px;
+        }
+
+        .semester-card h3 {
+            font-size: 17px;
+        }
+
+        .semester-card h3::before {
+            display: none;
+        }
+
+        .semester-card .icon {
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            font-size: 28px;
+        }
+
+        .section-title {
+            font-size: 22px;
+        }
+
+        .section-title::before,
+        .section-title::after {
+            display: none;
+        }
+    }
+
+    /* =========================
+       REDUCED MOTION
+       ========================= */
+    @media (prefers-reduced-motion: reduce) {
+
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
+</style>
+</head>
+<body>
+
+    <!-- ===== HERO ===== -->
+    <div class="hero">
+        <h1><i class="fas fa-graduation-cap"></i> BCA</h1>
+        <p>Bachelor of Computer Applications — Study Materials Portal</p>
+        <a href="/admin" class="admin-link"><i class="fas fa-lock"></i> Admin Login</a>
+    </div>
+
+    <!-- ===== SEMESTER GRID ===== -->
+    <div class="container">
+        <div class="section-title">
+            <i class="fas fa-layer-group"></i> Choose Your Semester
+        </div>
+        <div class="section-subtitle">
+            Select a semester to access all subject materials
+        </div>
+
+        <div class="semester-grid">
+            <a href="{% url 'semester' 1 %}" class="semester-card">
+                <div class="icon"><i class="fas fa-1"></i></div>
+                <h3>Semester 1</h3>
+                <p>Foundation subjects</p>
+                <span class="arrow">Explore →</span>
+            </a>
+            <a href="{% url 'semester' 2 %}" class="semester-card">
+                <div class="icon"><i class="fas fa-2"></i></div>
+                <h3>Semester 2</h3>
+                <p>Core programming</p>
+                <span class="arrow">Explore →</span>
+            </a>
+            <a href="{% url 'semester' 3 %}" class="semester-card">
+                <div class="icon"><i class="fas fa-3"></i></div>
+                <h3>Semester 3</h3>
+                <p>Advanced concepts</p>
+                <span class="arrow">Explore →</span>
+            </a>
+            <a href="{% url 'semester' 4 %}" class="semester-card">
+                <div class="icon"><i class="fas fa-4"></i></div>
+                <h3>Semester 4</h3>
+                <p>Database & Networks</p>
+                <span class="arrow">Explore →</span>
+            </a>
+            <a href="{% url 'semester' 5 %}" class="semester-card">
+                <div class="icon"><i class="fas fa-5"></i></div>
+                <h3>Semester 5</h3>
+                <p>Web & Software</p>
+                <span class="arrow">Explore →</span>
+            </a>
+            <a href="{% url 'semester' 6 %}" class="semester-card">
+                <div class="icon"><i class="fas fa-6"></i></div>
+                <h3>Semester 6</h3>
+                <p>Project & Electives</p>
+                <span class="arrow">Explore →</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <div class="footer">
+        Made by Balram <i class="fas fa-code"></i> Final Year Project
+    </div>
+
+</body>
+</html>
